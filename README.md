@@ -34,7 +34,7 @@ Keep page open to complete the next step.
 
 Open this Glitch project:
 
-[https://glitch.com/edit/#!/auth0-cookbook-api_express_javascript_customers]()
+[https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
 
 Click on the "Remix to Edit" button in the top-right corner.
 
@@ -80,42 +80,13 @@ With the `.env` configuration values set, you need to reload the project so that
 
 In your Glitch project, click on the "Share" button, which you can find under the project name in the top-left corner.
 
-Click on the "Live App" tab and copy the first URL right under the buttons. This is the root URL of your live server that you can use to make requests:
+Look for the **Project links** section and copy the "Live Site" link:
 
 ```bash
 https://<random-long-string>.glitch.me
 ```
 
-Open the terminal and test if the server is working by making the following request to get all the wishlist items:
-
-```bash
-curl https://<random-long-string>.glitch.me/api/wishlist/items
-```
-
-You should the following response from the server (the `id`'s will vary):
-
-```json
-[
-    {
-        "id": "K@MyH58Ej",
-        "name": "Apple iPhone 12",
-        "description": "128GB, White",
-        "url": "https://www.amazon.com/dp/B08L5Q1L2Q/"
-    },
-    {
-        "id": "oss94d7YUZ",
-        "name": "PlayStation 5 Console",
-        "description": "Ultra-high speed SSD and 3D Audio",
-        "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-    },
-    {
-        "id": "7ovKgpue7a",
-        "name": "Xbox Series S Console",
-        "description": "Smallest, sleekest Xbox console ever",
-        "url": "https://www.amazon.com/Xbox-S/dp/B08G9J44ZN"
-    }
-]
-```
+This is the root URL of your live server that you can use to make requests.
 
 ### Test a protected endpoint
 
@@ -124,7 +95,7 @@ You need an access token to call any of the protected API endpoints.
 Try to make the following request:
 
 ```bash
-curl https://<random-long-string>.glitch.me/api/wishlist/reset
+curl https://<random-long-string>.glitch.me/api/customers/rewards/9087654321
 ```
 
 You'll get the following response error:
@@ -149,13 +120,13 @@ curl --request GET \
 
 Copy and paste that value in a text editor.
 
-In the value of the `--header` parameter, the value of `authorization` is your access token.
+In the value of the `--header` parameter, the value of `really-long-string` is your access token.
 
-Replace the value of the `--url` parameter with your `GET api/wishlist/reset` endpoint URL:
+Replace the value of the `--url` parameter with your `GET api/customers/rewards/:id` endpoint URL:
 
 ```bash
 curl --request GET \
-  --url https://<random-long-string>.glitch.me/api/wishlist/reset \
+  --url https://<random-long-string>.glitch.me/api/customers/rewards/9087654321 \
   --header 'authorization: Bearer really-long-string'
 ```
 
@@ -163,45 +134,21 @@ Copy and paste the updated cURL command into a terminal window and execute it. Y
 
 Try calling any of the API endpoints outlined in the next section.
 
-
 ## API Endpoints
 
-### 🔓 List Items
+These endpoints require the request to include an access token issued by Auth0 in the authorization header.
 
-Lists all items from the wishlist.
+### 🔐 Get customer rewards
+
+Provides customer rewards data using a customer ID.
 
 ```bash
-GET /api/wishlist/items
+GET /api/customers/rewards/:id
 ```
 
 #### Response
 
-```bash
-Status: 200 OK
-```
-
-```json
-[
-    {
-        "id": "ep9EVXNoCz",
-        "name": "PlayStation 5 Console",
-        "description": "Ultra-high speed SSD and 3D Audio",
-        "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-    }
-]
-```
-
-### 🔓 Get an item
-
-Provides information an item from the wishlist.
-
-```bash
-GET /api/wishlist/items/:id
-```
-
-#### Response
-
-##### If item is not found
+##### If customer is not found
 
 ```bash
 Status: 404 Not Found
@@ -215,99 +162,22 @@ Status: 200 OK
 
 ```json
 {
-    "id": "oss94d7YUZ",
-    "name": "PlayStation 5 Console",
-    "description": "Ultra-high speed SSD and 3D Audio",
-    "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
+  "id":"9087654321",
+  "balance":830
 }
 ```
 
-> 🔐 Protected Endpoints: These endpoints require the request to include an access token issued by Auth0 in the authorization header.
+### 🔐 Get customer alert settings
 
-### 🔐 Create an item for the authenticated user
-
-Creates an item in the wishlist for the authenticated user.
+Provides customer alert settings data using a customer ID.
 
 ```bash
-POST /api/wishlist/items
-```
-
-#### Input
-
-| Name          | Type       | Description                                       |
-|---------------|:-----------|:--------------------------------------------------|
-| `name`        | `string`   | **Required**. The name of the item.               |
-| `description` | `string`   | **Required**. The description of the item.        |
-| `url`         | `string`   | **Required**. The URL where you can buy the item. |
-
-##### Example
-
-```json
-{
-    "name": "Apple iPhone 12",
-    "description": "128GB, White",
-    "url": "https://www.amazon.com/dp/B08L5Q1L2Q/"
-}
+GET /api/customers/alerts/:id
 ```
 
 #### Response
 
-```bash
-Status: 201 Created
-```
-
-```json
-{
-    "id": "QvcDfWMwg",
-    "name": "Apple iPhone 12",
-    "description": "128GB, White",
-    "url": "https://www.amazon.com/dp/B08L5Q1L2Q/"
-}
-```
-
-### 🔐 Update an item
-
-Update an item from the wishlist.
-
-```bash
-PUT /api/wishlist/items/:id
-```
-
-#### Input
-
-| Name          | Type       | Description                                       |
-|---------------|:-----------|:--------------------------------------------------|
-| `name`        | `string`   | **Required**. The name of the item.               |
-| `description` | `string`   | **Required**. The description of the item.        |
-| `url`         | `string`   | **Required**. The URL where you can buy the item. |
-
-If you only need to update some of the item properties, leave the other values as they are.
-                             
-##### Example
-
-Take the following item as an example: 
-
-```json
-{
-    "name": "PlayStation 5 Console",
-    "description": "Ultra-high speed SSD and 3D Audio",
-    "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-}
-```
-
-If you want to update the description only, you'll send a request body like the following:
-
-```json
-{
-    "name": "PlayStation 5",
-    "description": "Ultra-high speed SSD and 3D Audio",
-    "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-}
-```
-
-#### Response
-
-##### If item is not found
+##### If customer is not found
 
 ```bash
 Status: 404 Not Found
@@ -319,84 +189,10 @@ Status: 404 Not Found
 Status: 200 OK
 ```
 
-```bash
-{
-    "id": "zAvIQGhn$b",
-    "name": "PlayStation 5",
-    "description": "Ultra-high speed SSD and 3D Audio",
-    "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-}
-```
-
-### 🔐 Remove all items
-
-Remove all items from the wishlist.
-
-```bash
-DELETE /api/wishlist/items
-```
-
-#### Response
-
-```bash
-Status: 204 No Content
-```
-
-### 🔐 Remove an item
-
-Remove an item from the wishlist.
-
-```
-DELETE /api/wishlist/items/:id
-```
-
-#### Response
-
-##### If item is not found
-
-```bash
-Status: 404 Not Found
-```
-
-##### If item is found
-
-```bash
-Status: 204 No Content
-```
-
-### 🔐 Reset the list
-
-Reset the wishlist database to its default values.
-
-```bash
-GET /api/wishlist/reset
-```
-
-#### Response
-
-```bash
-Status: 200 OK
-```
-
 ```json
-[
-    {
-        "id": "K@MyH58Ej",
-        "name": "Apple iPhone 12",
-        "description": "128GB, White",
-        "url": "https://www.amazon.com/dp/B08L5Q1L2Q/"
-    },
-    {
-        "id": "oss94d7YUZ",
-        "name": "PlayStation 5 Console",
-        "description": "Ultra-high speed SSD and 3D Audio",
-        "url": "https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG"
-    },
-    {
-        "id": "7ovKgpue7a",
-        "name": "Xbox Series S Console",
-        "description": "Smallest, sleekest Xbox console ever",
-        "url": "https://www.amazon.com/Xbox-S/dp/B08G9J44ZN"
-    }
-]
+{
+  "id":"9087654321",
+  "text":false,
+  "email":true
+} 
 ```
