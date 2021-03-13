@@ -1,6 +1,50 @@
-# Auth0 Eats Customers API: Express Sample
+# Auth0 Eats Customers API
 
-## Quick Setup
+You can use this sample to learn how to secure an Express API server with Auth0. You can then use a client application to practice making secure API calls.
+
+As part of the setup process, you'll also learn how to quickly host this API on the cloud using Glitch.com and how to test it using the command line.
+
+## 0. Get Started
+
+There are two ways to get started: you can work with a local repository or you can work with a cloud project using Glitch.
+
+### 0.A. Use a local repository
+
+Clone the repository: 
+
+```bash
+git clone git@github.com:auth0-cookbook/api_express_javascript_customers.git
+```
+
+Make the project directory your current directory:
+
+```bash
+cd api_express_javascript_customers
+```
+
+Install the project dependencies:
+
+```bash
+npm i
+```
+
+Finally, create a `.env` file under the project directory:
+
+```bash
+.env
+```
+
+### 0.B. Use Glitch, an online IDE
+
+Glitch lets you edit a Node.js project on the cloud and create a live server quickly.
+
+Open this Glitch project:
+
+[https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
+
+Click on the "Remix to Edit" button in the top-right corner.
+
+That's it!
 
 ### 1. Configure Auth0
 
@@ -10,37 +54,23 @@ Open the [APIs section of the Auth0 Dashboard](https://manage.auth0.com/#/apis),
 
 Fill out the form that comes up:
 
-- **Name:**
+- **Name:** Auth0 Eats Customers API Sample
 
-```
-Auth0 Eats Customers API Sample
-```
-
-- **Identifier:**
-
-```
-https://customers.example.com
-```
+- **Identifier:** `https://customers.example.com`
 
 Leave the signing algorithm as `RS256`. It's the best option from a security standpoint.
 
-Once you've added those values, click the "Create" button.
+Once you've added those values, click the **"Create"** button.
 
 Once you create an Auth0 API, a new page loads up, presenting you with your Auth0 API information.
 
 Keep page open to complete the next step.
 
-### 2. Create a Quick Live Server
-
-Open this Glitch project:
-
-[https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
-
-Click on the "Remix to Edit" button in the top-right corner.
-
 ### 3. Connect the Server with Auth0
 
-Click on the `.env` file from your Glitch project. You'll need to add the values for `AUTH0_AUDIENCE` and `AUTH0_DOMAIN` from your Auth0 API configuration.
+Click on the `.env` file from your local project or your Glitch project.
+
+You'll need to add the values for `AUTH0_AUDIENCE` and `AUTH0_DOMAIN` from your Auth0 API configuration.
 
 Head back to your Auth0 API page, and **follow these steps to get the Auth0 Audience**:
 
@@ -72,21 +102,21 @@ Now, **follow these steps to get the Auth0 Domain value**:
 
 - **Click on the image above, please, if you have any doubt on how to get the Auth0 Domain value**.
 
-With the `.env` configuration values set, you need to reload the project so that Express can see these new environment variables.
+With the `.env` configuration values set, you need to restart the local server so that Express can see these new environment variables. If you are using Glitch, simply refresh the project page.
 
-**To reload the project, refresh the Glitch project page.**
+### 4. Test the Server
 
-### 4. Test the Live Server
+You need your API server root URL to make requests.
 
-In your Glitch project, click on the "Share" button, which you can find under the project name in the top-left corner.
+The local server root URL is `http://localhost:6060`.
 
-Look for the **Project links** section and copy the "Live Site" link:
+The Glitch server root URL is `https://<random-long-string>.glitch.me`.
 
-```bash
-https://<random-long-string>.glitch.me
-```
-
-This is the root URL of your live server that you can use to make requests.
+> You can find the Glitch project server URL by following these instructions:
+>
+> In your Glitch project, click on the "Share" button, which you can find under the project name in the top-left corner.
+> 
+> Look for the **Project links** section and copy the "Live Site" link.
 
 ### Test a protected endpoint
 
@@ -95,7 +125,7 @@ You need an access token to call any of the protected API endpoints.
 Try to make the following request:
 
 ```bash
-curl https://<random-long-string>.glitch.me/api/customers/rewards/9087654321
+curl <SERVER_ROOT_URL>/api/customers/rewards/9087654321
 ```
 
 You'll get the following response error:
@@ -114,7 +144,7 @@ You should see something like this:
 
 ```bash
 curl --request GET \
-  --url http://path_to_your_api/ \
+  --url <SERVER_ROOT_URL>/path_to_your_api/ \
   --header 'authorization: Bearer really-long-string'
 ```
 
@@ -126,19 +156,19 @@ Replace the value of the `--url` parameter with your `GET api/customers/rewards/
 
 ```bash
 curl --request GET \
-  --url https://<random-long-string>.glitch.me/api/customers/rewards/9087654321 \
+  --url <SERVER_ROOT_URL>/api/customers/rewards/9087654321 \
   --header 'authorization: Bearer really-long-string'
 ```
 
 Copy and paste the updated cURL command into a terminal window and execute it. You should now get a valid response.
 
-Try calling any of the API endpoints outlined in the next section.
+You can also use any of the Auth0 Eats client applications to consume this API. The client applications require users to log in, obtaining an access token in the background, before they can call the Auth0 Eats Customers API.
 
 ## API Endpoints
 
 These endpoints require the request to include an access token issued by Auth0 in the authorization header.
 
-### 🔐 Get customer rewards
+### 🔐 Get customer rewards data
 
 Provides customer rewards data using a customer ID.
 
@@ -148,13 +178,13 @@ GET /api/customers/rewards/:id
 
 #### Response
 
-##### If customer is not found
+##### If customer data is not found
 
 ```bash
 Status: 404 Not Found
 ```
 
-##### If item is found
+##### If customer data is found
 
 ```bash
 Status: 200 OK
@@ -163,36 +193,10 @@ Status: 200 OK
 ```json
 {
   "id":"9087654321",
-  "balance":830
+  "balance":830,
+  "alerts": {
+    "text": false,
+    "email": true
+  }
 }
-```
-
-### 🔐 Get customer alert settings
-
-Provides customer alert settings data using a customer ID.
-
-```bash
-GET /api/customers/alerts/:id
-```
-
-#### Response
-
-##### If customer is not found
-
-```bash
-Status: 404 Not Found
-```
-
-##### If item is found
-
-```bash
-Status: 200 OK
-```
-
-```json
-{
-  "id":"9087654321",
-  "text":false,
-  "email":true
-} 
 ```

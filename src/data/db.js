@@ -7,6 +7,5 @@ const adapter = new FileSync("./src/data/db.json", {
 
 const db = low(adapter);
 const rewardsCollection = "rewards";
-const alertsCollection = "alerts";
 
-module.exports = { db, rewardsCollection, alertsCollection };
+module.exports = { db, rewardsCollection };

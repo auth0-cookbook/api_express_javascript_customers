@@ -2,14 +2,12 @@
   "rewards": [
     {
       "id": "9087654321",
-      "balance": 830
-    }
-  ],
-  "alerts": [
-    {
-      "id": "9087654321",
-      "text": false,
-      "email": true
+      "balance": 830,
+      "alerts": {
+        "text": false,
+        "email": true
+
+      }
     }
   ]
 }
