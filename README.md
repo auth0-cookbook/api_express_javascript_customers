@@ -42,7 +42,7 @@ Open this Glitch project:
 
 [https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
 
-Click on the "Remix to Edit" button in the top-right corner.
+Click on the **"Remix to Edit"** button in the top-right corner.
 
 That's it!
 
@@ -50,7 +50,7 @@ That's it!
 
 You need an Auth0 account. If you don't have one yet, <a href="https://auth0.com/signup">sign up for a free Auth0 account</a>.
 
-Open the [APIs section of the Auth0 Dashboard](https://manage.auth0.com/#/apis), click the "Create API" button.
+Open the [APIs section of the Auth0 Dashboard](https://manage.auth0.com/#/apis), click the **"Create API"** button.
 
 Fill out the form that comes up:
 
@@ -80,7 +80,7 @@ Head back to your Auth0 API page, and **follow these steps to get the Auth0 Audi
 
 2. Locate the **"Identifier"** field and copy its value.
 
-3. Paste the "Identifier" value as the value of `AUTH0_AUDIENCE` in `.env`.
+3. Paste the **"Identifier"** value as the value of `AUTH0_AUDIENCE` in `.env`.
 
 Now, **follow these steps to get the Auth0 Domain value**:
 
@@ -114,9 +114,9 @@ The Glitch server root URL is `https://<random-long-string>.glitch.me`.
 
 > You can find the Glitch project server URL by following these instructions:
 >
-> In your Glitch project, click on the "Share" button, which you can find under the project name in the top-left corner.
+> In your Glitch project, click on the **"Share"** button, which you can find under the project name in the top-left corner.
 > 
-> Look for the **Project links** section and copy the "Live Site" link.
+> Look for the **Project links** section and copy the **"Live Site"** link.
 
 ### Test a protected endpoint
 
@@ -136,9 +136,9 @@ No authorization token was found
 
 To get an access token, head back to your API configuration page in the Auth0 Dashboard.
 
-Click on the "Test" tab and locate the "Sending the token to the API".
+Click on the **"Test"** tab and locate the **"Sending the token to the API"**.
 
-Click on the "cURL" tab.
+Click on the **"cURL"** tab.
 
 You should see something like this:
 
