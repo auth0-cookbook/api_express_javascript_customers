@@ -28,10 +28,16 @@ Install the project dependencies:
 npm i
 ```
 
-Finally, create a `.env` file under the project directory:
+Create a `.env` file under the project directory:
 
 ```bash
 .env
+```
+
+Finally, run the project:
+
+```bash
+npm start
 ```
 
 ### 0.B. Use Glitch, an online IDE
@@ -46,7 +52,7 @@ Click on the **"Remix to Edit"** button in the top-right corner.
 
 That's it!
 
-### 1. Configure Auth0
+## 1. Register an API Server with Auth0
 
 You need an Auth0 account. If you don't have one yet, <a href="https://auth0.com/signup">sign up for a free Auth0 account</a>.
 
@@ -66,7 +72,7 @@ Once you create an Auth0 API, a new page loads up, presenting you with your Auth
 
 Keep page open to complete the next step.
 
-### 3. Connect the Server with Auth0
+## 2. Connect the Server with Auth0
 
 Click on the `.env` file from your local project or your Glitch project.
 
@@ -104,7 +110,7 @@ Now, **follow these steps to get the Auth0 Domain value**:
 
 With the `.env` configuration values set, you need to restart the local server so that Express can see these new environment variables. If you are using Glitch, simply refresh the project page.
 
-### 4. Test the Server
+## 3. Test the Server
 
 You need your API server root URL to make requests.
 
@@ -118,7 +124,7 @@ The Glitch server root URL is `https://<random-long-string>.glitch.me`.
 > 
 > Look for the **Project links** section and copy the **"Live Site"** link.
 
-### Test a protected endpoint
+## 4. Test a protected endpoint
 
 You need an access token to call any of the protected API endpoints.
 
