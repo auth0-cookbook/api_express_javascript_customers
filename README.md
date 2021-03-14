@@ -54,7 +54,7 @@ That's it!
 
 ## 2. Register an API Server with Auth0
 
-You need an Auth0 account. If you don't have one yet, <a href="https://auth0.com/signup">sign up for a free Auth0 account</a>.
+You need an Auth0 account. If you don't have one yet, [sign up for a free Auth0 account](https://auth0.com/signup).
 
 Open the [APIs section of the Auth0 Dashboard](https://manage.auth0.com/#/apis), click the **"Create API"** button.
 
