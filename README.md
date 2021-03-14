@@ -4,11 +4,11 @@ You can use this sample to learn how to secure an Express API server with Auth0.
 
 As part of the setup process, you'll also learn how to quickly host this API on the cloud using Glitch.com and how to test it using the command line.
 
-## 0. Get Started
+## 1. Get Started
 
 There are two ways to get started: you can work with a local repository or you can work with a cloud project using Glitch.
 
-### 0.A. Use a local repository
+### 1.A. Use a local repository
 
 Clone the repository: 
 
@@ -40,7 +40,7 @@ Finally, run the project:
 npm start
 ```
 
-### 0.B. Use Glitch, an online IDE
+### 1.B. Use Glitch, an online IDE
 
 Glitch lets you edit a Node.js project on the cloud and create a live server quickly.
 
@@ -52,7 +52,7 @@ Click on the **"Remix to Edit"** button in the top-right corner.
 
 That's it!
 
-## 1. Register an API Server with Auth0
+## 2. Register an API Server with Auth0
 
 You need an Auth0 account. If you don't have one yet, <a href="https://auth0.com/signup">sign up for a free Auth0 account</a>.
 
@@ -72,7 +72,7 @@ Once you create an Auth0 API, a new page loads up, presenting you with your Auth
 
 Keep page open to complete the next step.
 
-## 2. Connect the Server with Auth0
+## 3. Connect the Server with Auth0
 
 Click on the `.env` file from your local project or your Glitch project.
 
@@ -110,7 +110,7 @@ Now, **follow these steps to get the Auth0 Domain value**:
 
 With the `.env` configuration values set, you need to restart the local server so that Express can see these new environment variables. If you are using Glitch, simply refresh the project page.
 
-## 3. Test the Server
+## 4. Test the Server
 
 You need your API server root URL to make requests.
 
@@ -124,7 +124,7 @@ The Glitch server root URL is `https://<random-long-string>.glitch.me`.
 > 
 > Look for the **Project links** section and copy the **"Live Site"** link.
 
-## 4. Test a protected endpoint
+### Test a protected endpoint
 
 You need an access token to call any of the protected API endpoints.
 
@@ -170,11 +170,11 @@ Copy and paste the updated cURL command into a terminal window and execute it. Y
 
 You can also use any of the Auth0 Eats client applications to consume this API. The client applications require users to log in, obtaining an access token in the background, before they can call the Auth0 Eats Customers API.
 
-## API Endpoints
+### API Endpoints
 
 These endpoints require the request to include an access token issued by Auth0 in the authorization header.
 
-### 🔐 Get customer rewards data
+#### 🔐 Get customer rewards data
 
 Provides customer rewards data using a customer ID.
 
@@ -182,15 +182,15 @@ Provides customer rewards data using a customer ID.
 GET /api/customers/rewards/:id
 ```
 
-#### Response
+##### Response
 
-##### If customer data is not found
+###### If customer data is not found
 
 ```bash
 Status: 404 Not Found
 ```
 
-##### If customer data is found
+###### If customer data is found
 
 ```bash
 Status: 200 OK
