@@ -44,9 +44,7 @@ npm start
 
 Glitch lets you edit a Node.js project on the cloud and create a live server quickly.
 
-Open this Glitch project:
-
-[https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
+Open this Glitch project: [https://glitch.com/edit/#!/api--express--javascript--customers](https://glitch.com/edit/#!/api--express--javascript--customers?path=README.md%3A1%3A0)
 
 Click on the **"Remix to Edit"** button in the top-right corner.
 
