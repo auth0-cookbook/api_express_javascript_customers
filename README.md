@@ -8,7 +8,7 @@ As part of the setup process, you'll also learn how to quickly host this API on 
 
 There are two ways to get started: you can work with a local repository or you can work with a cloud project using Glitch.
 
-### 1.A. Use a local repository
+### Use a local repository
 
 Clone the repository: 
 
@@ -40,7 +40,7 @@ Finally, run the project:
 npm start
 ```
 
-### 1.B. Use Glitch, an online IDE
+### Use Glitch, an online IDE
 
 Glitch lets you edit a Node.js project on the cloud and create a live server quickly.
 
@@ -49,6 +49,44 @@ Open this Glitch project: [https://glitch.com/edit/#!/api--express--javascript--
 Click on the **"Remix to Edit"** button in the top-right corner.
 
 That's it!
+
+### API Endpoints
+
+These endpoints require the request to include an access token issued by Auth0 in the authorization header.
+
+#### 🔐 Get customer rewards data
+
+Provides customer rewards data using a customer ID.
+
+```bash
+GET /api/customers/rewards/:id
+```
+
+##### Response
+
+###### If customer data is not found
+
+```bash
+Status: 404 Not Found
+```
+
+###### If customer data is found
+
+```bash
+Status: 200 OK
+```
+
+```json
+{
+  "id":"9087654321",
+  "balance":830,
+  "alerts": {
+    "text": false,
+    "email": true
+  }
+}
+```
+
 
 ## 2. Register an API Server with Auth0
 
@@ -168,39 +206,3 @@ Copy and paste the updated cURL command into a terminal window and execute it. Y
 
 You can also use any of the Auth0 Eats client applications to consume this API. The client applications require users to log in, obtaining an access token in the background, before they can call the Auth0 Eats Customers API.
 
-### API Endpoints
-
-These endpoints require the request to include an access token issued by Auth0 in the authorization header.
-
-#### 🔐 Get customer rewards data
-
-Provides customer rewards data using a customer ID.
-
-```bash
-GET /api/customers/rewards/:id
-```
-
-##### Response
-
-###### If customer data is not found
-
-```bash
-Status: 404 Not Found
-```
-
-###### If customer data is found
-
-```bash
-Status: 200 OK
-```
-
-```json
-{
-  "id":"9087654321",
-  "balance":830,
-  "alerts": {
-    "text": false,
-    "email": true
-  }
-}
-```
